@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MathApp</string>
+    <string name="screen_home">BG</string>
+    <string name="screen_home_2">Главная</string>
+    <string name="screen_book">Книга</string>
+    <string name="screen_testing">Тестирование</string>
+    <string name="screen_hi">Знакомство</string>
+    <string name="screen_settings">Настройки</string>
+    <string name="screen_docs">Справка</string>
+    <string name="screen_about">О программе</string>
+</resources>
