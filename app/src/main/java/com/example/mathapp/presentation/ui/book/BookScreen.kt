@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.mathapp.app.host.BooksList
+import com.example.mathapp.presentation.ui.book.components.BooksList
 
 @Composable
 fun BookScreen() {
