@@ -60,25 +60,19 @@ android {
 }
 
 dependencies {
-    //noinspection UseTomlInstead
-    implementation("io.github.jan-tennert.supabase:postgrest-kt:0.7.6")
-    // implementation("io.github.jan-tennert.supabase:storage-kt:3.0.3")
-    //noinspection UseTomlInstead
-    implementation("io.ktor:ktor-client-cio:2.3.3")
-    //noinspection UseTomlInstead
+    //noinspection GradleDependency,UseTomlInstead
+    implementation("io.github.jan-tennert.supabase:postgrest-kt:3.0.0")
+    implementation("io.github.jan-tennert.supabase:storage-kt:3.0.0")
+    implementation("io.github.jan-tennert.supabase:auth-kt:3.0.0")
+
+    implementation("io.ktor:ktor-client-cio:3.0.2")
+
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
-    //noinspection UseTomlInstead
-    // implementation("io.github.jan-tennert.supabase:gotrue-kt:3.0.0")
 
-    // implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.21")
-
-    // implementation("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
-
-    //noinspection UseTomlInstead
     implementation("androidx.compose.ui:ui:1.7.5")
-    //noinspection UseTomlInstead
+
     implementation ("androidx.compose.material3:material3:1.3.1")
-    //noinspection UseTomlInstead
+
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
 
     implementation(libs.accompanist.systemuicontroller)

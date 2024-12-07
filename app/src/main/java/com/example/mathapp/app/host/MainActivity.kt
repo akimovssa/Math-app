@@ -30,9 +30,10 @@ import com.example.mathapp.presentation.theme.MathAppTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.auth.Auth
+import io.github.jan.supabase.auth.FlowType
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.postgrest
-//import io.github.jan.supabase.storage.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -50,7 +51,10 @@ private fun getClient(): SupabaseClient {
         supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ1bnZ3ZHR5bnF5a3lsamVkZ2VtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0MDA4NzAsImV4cCI6MjA0ODk3Njg3MH0.UaB70k4K9pZq98C7p1q_Smhahje96AATusQlwGDKMBE"
     ) {
         install(Postgrest)
-        // install(io.github.jan.supabase.storage.Storage)
+        install(io.github.jan.supabase.storage.Storage)
+        install(Auth) {
+            flowType = FlowType.PKCE
+        }
     }
 }
 
