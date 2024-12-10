@@ -37,8 +37,8 @@ fun SelectOption() {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
 
-    val languages = listOf("Русский", "Английский")
-    val themes = listOf("Светлая", "Темная")
+    val languages = listOf("Русский")
+    val themes = listOf("Светлая")
 
     var selectedLanguage by remember { mutableStateOf(languages[0]) }
     var selectedTheme by remember { mutableStateOf(themes[0]) }

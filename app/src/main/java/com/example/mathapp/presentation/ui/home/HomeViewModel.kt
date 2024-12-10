@@ -1,6 +1,7 @@
 package com.example.mathapp.presentation.ui.home
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import com.example.mathapp.R
@@ -17,9 +18,10 @@ data class HomePageItem(
 @Composable
 fun HomePageItems(onItemClick: (ScreensRoute) -> Unit) {
     val homePageItemsDrawer = listOf(
-        HomePageItem(ScreensRoute.BookScreen, R.drawable.ic_book, colorResource(R.color.whitesmoke), colorResource(R.color.blue_75)),
-        HomePageItem(ScreensRoute.TestingScreen, R.drawable.ic_test, colorResource(R.color.black_100), colorResource(R.color.green_75))
+        HomePageItem(ScreensRoute.BookScreen, R.drawable.ic_book, colorResource(R.color.whitesmoke), colorResource(R.color.blue_75))
     )
 
-    HomePageDraw(homePageItemsDrawer, onItemClick)
+    val scope = rememberCoroutineScope()
+
+    HomePageDraw(homePageItemsDrawer, scope, onItemClick)
 }

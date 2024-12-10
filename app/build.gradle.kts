@@ -42,13 +42,6 @@ android {
     buildFeatures {
         compose = true
     }
-//    testOptions {
-//        unitTests.isIncludeAndroidResources = true
-//        unitTests.all {
-//            useJUnitPlatform()
-//        }
-//    }
-
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
@@ -65,14 +58,15 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:storage-kt:3.0.0")
     implementation("io.github.jan-tennert.supabase:auth-kt:3.0.0")
 
+    implementation("io.github.grizzi91:bouquet:1.1.2")
+
     implementation("io.ktor:ktor-client-cio:3.0.2")
 
+    implementation("org.mindrot:jbcrypt:0.4")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
     implementation("androidx.compose.ui:ui:1.7.5")
-
-    implementation ("androidx.compose.material3:material3:1.3.1")
-
+    implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
 
     implementation(libs.accompanist.systemuicontroller)

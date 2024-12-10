@@ -16,5 +16,5 @@ val drawerScreens = listOf(
 )
 
 enum class ScreensRoute {
-    HomeScreen, BookScreen, TestingScreen, HiScreen, SettingsScreen, DocsScreen, AboutScreen
+    HomeScreen, BookScreen, AuthScreen, SettingsScreen, DocsScreen, AboutScreen
 }

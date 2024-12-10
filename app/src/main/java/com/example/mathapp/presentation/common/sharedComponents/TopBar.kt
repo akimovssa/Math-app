@@ -14,9 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import com.example.mathapp.presentation.navigation.ScreensRoute
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -25,8 +22,6 @@ fun TopBar(
     modifier: Modifier = Modifier,
     openDrawer: () -> Unit
 ) {
-    val navController = rememberNavController()
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route ?: ""
 
     TopAppBar(
         title = {
@@ -40,15 +35,13 @@ fun TopBar(
             )
         },
         navigationIcon = {
-            if (currentRoute != ScreensRoute.HiScreen.name) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    modifier = Modifier
-                        .padding(start = 15.dp)
-                        .clickable { openDrawer() },
-                    contentDescription = null
-                )
-            }
+            Icon(
+                imageVector = Icons.Default.Menu,
+                modifier = Modifier
+                    .padding(start = 15.dp)
+                    .clickable { openDrawer() },
+                contentDescription = null
+            )
         },
         modifier = modifier
 

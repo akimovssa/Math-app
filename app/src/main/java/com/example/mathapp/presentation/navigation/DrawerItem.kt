@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -16,31 +15,56 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mathapp.R
+import com.example.mathapp.app.host.SupabaseClientConn
+import com.example.mathapp.app.host.UserPreferences
+import com.example.mathapp.app.host.UserViewModel
+import io.github.jan.supabase.auth.auth
 
 @Composable
 fun DrawerHeader() {
     val clipboardManager = LocalClipboardManager.current
-    val uuid = "12345678-1234-1234-1234-123456789012"
+    val context = LocalContext.current
+    val client = SupabaseClientConn.getClient()
+    val session = client.auth.currentSessionOrNull()
+    val user = session?.user
+
+    val userViewModel: UserViewModel = viewModel()
+
+    LaunchedEffect(user) {
+        if (user != null) {
+            val userId = user.id
+            val userEmail = user.email ?: ""
+
+            userViewModel.updateUserData(userId, userEmail)
+
+            UserPreferences.saveUserData(context = context, userId = userId, userEmail = userEmail)
+        }
+    }
+
+    val userId = userViewModel.userId.value
+    val userEmail = userViewModel.userEmail.value
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(15.dp, 15.dp, 15.dp, 0.dp),
+            .padding(10.dp, 15.dp, 10.dp, 0.dp),
         verticalArrangement = Arrangement.Center
     ) {
         Row(
@@ -54,8 +78,10 @@ fun DrawerHeader() {
                     .size(70.dp)
             )
             Text(
-                text = "ФИО",
+                text = userEmail,
                 color = colorResource(R.color.whitesmoke),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.W700,
                 modifier = Modifier.padding(horizontal = 10.dp)
@@ -69,12 +95,12 @@ fun DrawerHeader() {
                 Color.Transparent
             ),
             onClick = {
-                clipboardManager.setText(AnnotatedString(uuid))
+                clipboardManager.setText(AnnotatedString(userId))
             },
             contentPadding = PaddingValues(0.dp)
         ) {
             Text(
-                text = "UUID: $uuid",
+                text = "UUID: $userId",
                 color = colorResource(R.color.whitesmoke),
                 fontSize = 12.sp,
                 maxLines = 1,
@@ -115,14 +141,14 @@ fun DrawerItem(menuItem: MenuItem, modifier: Modifier = Modifier, onItemClick: (
 
 @Composable
 fun DrawerFooter() {
-    Row(
+    Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(15.dp),
-        horizontalArrangement = Arrangement.Center
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Bottom,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Версия 0.0.1",
+            text = "Версия: 0.1",
             color = colorResource(R.color.white_200),
             fontSize = 12.sp,
             modifier = Modifier.padding(horizontal = 10.dp)
